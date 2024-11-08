@@ -19,7 +19,7 @@ for max_number in random_numbers_list:
 
 
 
-# Chatgpt version
+# More efficient version, does the same thing.
 
 # random_numbers_list = [123, 88, 55, 23, 734, 98, 37, 25, 78, 95, 64, 34, 76, 45]
 
