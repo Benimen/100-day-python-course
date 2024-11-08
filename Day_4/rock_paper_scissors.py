@@ -2,91 +2,69 @@
 import random
 import os
 
-# Clear screen
-os.system("cls")
+# Clear screen function
+def clear_screen():
+    os.system("cls")
 
 # Win count
 computer_wins = 0
 player_wins = 0
 
+# Calls clear screen function
+clear_screen()
 
 # Dialogue
 print("Welcome to the rock paper scissors game.")
 print("It is best of 3, good luck!")
+input("Press any button to continue...")
 
+# Calls clear screen function
+clear_screen()
+
+# Winning combination Dictionary
+winning_combinations = {
+    "rock": "scissors",
+    "paper": "rock",
+    "scissors": "paper"
+}
 
 while True:
     
 
     # Player input
-    player_choice = input("Choose between (rock, paper, scissors)\n")
-
-    # List
-    game_list = ["rock", "paper", "scissors"]
+    player_choice = input("Choose between (rock, paper, scissors)\n").lower()
+    if player_choice not in winning_combinations:
+        clear_screen()
+        print(f"{player_choice} is a invalid choice, try again.")
+        continue
 
     # Computer input
-    computer_choice = random.choice(game_list)
+    computer_choice = random.choice(list(winning_combinations.keys()))
 
-
-    # Draw
+    # Check result
     if player_choice == computer_choice:
-        os.system("cls")
-        print(f"You chose {player_choice} and computer chose {computer_choice}, it's a draw.")
+        clear_screen()
+        print(f"You chose {player_choice}, and the computer chose {computer_choice}, it's a draw.")
         print(f"Current scores: computer: {computer_wins} player: {player_wins}")
 
-
-    # Rock
-    elif player_choice == "rock" and computer_choice == "paper":
-        os.system("cls")
-        print(f"You chose {player_choice} and computer chose {computer_choice}, You lose.")
-        computer_wins += 1
-        print(f"Current scores: computer: {computer_wins} player: {player_wins}")
-
-    elif player_choice == "rock" and computer_choice == "scissors":
-        os.system("cls")
-        print(f"You chose {player_choice} and computer chose {computer_choice}, You win.")
+    elif winning_combinations[player_choice] == computer_choice:
         player_wins += 1
+        clear_screen()
+        print(f"You chose {player_choice}, and the computer chose {computer_choice}")
         print(f"Current scores: computer: {computer_wins} player: {player_wins}")
 
-
-    # Paper
-    elif player_choice == "paper" and computer_choice == "rock":
-        os.system("cls")
-        print(f"You chose {player_choice} and computer chose {computer_choice}, You win.")
-        player_wins += 1
-        print(f"Current scores: computer: {computer_wins} player: {player_wins}")
-
-    elif player_choice == "paper" and computer_choice == "scissors":
-        os.system("cls")
-        print(f"You chose {player_choice} and computer chose {computer_choice}, You lose.")
+    else:
         computer_wins += 1
+        clear_screen()
+        print(f"You chose {player_choice}, and the computer chose {computer_choice}")
         print(f"Current scores: computer: {computer_wins} player: {player_wins}")
-
-
-    # Scissors
-    elif player_choice == "scissors" and computer_choice == "rock":
-        os.system("cls")
-        print(f"You chose {player_choice} and computer chose {computer_choice}, You lose.")
-        computer_wins += 1
-        print(f"Current scores: computer: {computer_wins} player: {player_wins}")
-
-    elif player_choice == "scissors" and computer_choice == "paper":
-        os.system("cls")
-        print(f"You chose {player_choice} and computer chose {computer_choice}, You win.")
-        player_wins += 1
-        print(f"Current scores: computer: {computer_wins} player: {player_wins}")
-
 
     # Check winner
     if computer_wins == 3:
-        os.system("cls")
-        print(f"Current scores: computer: {computer_wins} player: {player_wins}")
         print("GAME OVER, YOU LOSE!")
         break
 
     # Check winner
     if player_wins == 3:
-        os.system("cls")
-        print(f"Current scores: computer: {computer_wins} player: {player_wins}")
         print("YOU WIN!")
         break
